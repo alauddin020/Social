@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<title> HTML Demo Beginer With Jquery</title>
+<link rel="stylesheet" href="css/bootstrap.min.css"> 
+<link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
+
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+</head>
+
+<body class="container">
+<h1 align="center"> Welcome To HTML Demo Beginer With Jquery</h1>
+<p align="center"> This is sample structure of 5.
+Now i want to show you about some element form of HTML.
+<br>let's see together.
+</p>
+<br>
+<br>
+<form method="post" class="form-inline">
+	<div>
+		<input type="text" name="id" placeholder="ID" class="form-control">
+		<input type="text" name="name" placeholder="Name" class="form-control">
+		<select name="sex" class="form-control"> <!-- use for select on drop down menu -->
+			<option value="Male">Male</option>
+			<option value="Female">Female</option>
+		</select>
+		<input type="text" name="tel" placeholder="Tel" class="form-control">
+		<input type="text" name="address" placeholder="Address" class="form-control">
+		<button type="button" class="btn btn-info" id="btn-add">Add New</button>
+		<button type="button" class="btn btn-success" id="btn-update">Update</button>
+	</div>
+</form>
+<hr>
+<table class="table">
+	<thead>
+		<tr>
+			<th>IDq</th>
+			<th>Name</th>
+			<th>Sex</th>
+			<th>Tel</th>
+			<th>Address</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+	</tbody>
+</table>
+<script>
+// test alert
+$(function(){
+	// if we use id we need $('#some-name'); or class we use $('.some-name');
+	$('#btn-add').click(function(){
+		// declare variable
+		var _id = $('input[name="id"]').val();
+		var _name = $('input[name="name"]').val();
+		var _sex = $('select[name="sex"]').val();
+		var _tel = $('input[name="tel"]').val();
+		var _address = $('input[name="address"]').val();
+		
+		var _tr = '<tr><td>'+ _id +'</td>	<td>'+ _name +'</td>	<td>'+_sex+'</td>	<td>'+_tel+'</td>	<td>'+_address+'</td> 	<td><button type="button" class="btn btn-success btn-edit">Edit </button> | <button type="button" class="btn btn-danger btn-delete">Delete </button></td></tr>';
+		
+		$('tbody').append(_tr);
+	});
+	var _trEdit = null;
+	$(document).on('click', '.btn-edit',function(){
+		_trEdit = $(this).closest('tr');
+		var _id = $(_trEdit).find('td:eq(0)').text();
+		var _name = $(_trEdit).find('td:eq(1)').text();
+		var _sex = $(_trEdit).find('td:eq(2)').text();
+		var _tel = $(_trEdit).find('td:eq(3)').text();
+		var _address = $(_trEdit).find('td:eq(4)').text();
+		
+		$('input[name="id"]').val(_id);
+		$('input[name="name"]').val(_name);
+		$('select[name="sex"]').val(_sex);
+		$('input[name="tel"]').val(_tel);
+		$('input[name="address"]').val(_address);
+	}); 
+	
+	$('#btn-update').click(function(){
+		if(_trEdit){
+			var _id = $('input[name="id"]').val();
+			var _name = $('input[name="name"]').val();
+			var _sex = $('select[name="sex"]').val();
+			var _tel = $('input[name="tel"]').val();
+			var _address = $('input[name="address"]').val();
+			
+			$(_trEdit).find('td:eq(0)').text(_id);
+			$(_trEdit).find('td:eq(1)').text(_name);
+			$(_trEdit).find('td:eq(2)').text(_sex);
+			$(_trEdit).find('td:eq(3)').text(_tel);
+			$(_trEdit).find('td:eq(4)').text(_address);
+			alert("Record has been updated!");
+			_trEdit = null;
+		}
+	});
+	
+	$(document).on('click','.btn-delete', function(){
+		if(confirm("Are you sure to delete?")){
+			$(this).closest('tr').remove();	
+		}
+	});
+});
+</script>
+</body>
+</html> 

@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^localhost$
+RewriteCond %{REQUEST_URI} !^/localhost/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+#RewriteRule ^(.*)$ $1.php
+RewriteRule ^/?(.*?)/?$ $1.php
+
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ profile.php?fa=$1 
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ profile.php?fa=$1 
